@@ -6,6 +6,7 @@ import 'package:instagram_flutter/responsive/responsive_layput_screen.dart';
 import 'package:instagram_flutter/responsive/web_screen_layout.dart';
 import 'package:instagram_flutter/screens/signup_screen.dart';
 import 'package:instagram_flutter/utils/colors.dart';
+import 'package:instagram_flutter/utils/global_variable.dart';
 import 'package:instagram_flutter/utils/utils.dart';
 import 'package:instagram_flutter/widgets/text_field_input.dart';
 
@@ -72,14 +73,19 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         body: SafeArea(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
+            padding: MediaQuery.of(context).size.width > webScreenSize
+                ? EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 3)
+                : const EdgeInsets.symmetric(horizontal: 32),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Flexible(child: Container(), flex: 2),
+                Flexible(flex: 2, child: Container()),
                 // svg image
                 SvgPicture.asset('assets/ic_instagram.svg',
-                    color: primaryColor, height: 64),
+                    // ignore: deprecated_member_use
+                    color: primaryColor,
+                    height: 64),
                 const SizedBox(height: 64),
                 // text field input for email
                 TextFieldInput(
